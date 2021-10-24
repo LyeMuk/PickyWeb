@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>ADD URL</title>
+  </head>
+  <script>
+      if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+      }
+  </script>
+  <body>
+
+
+{% ifnotequal created "null" %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{what}} is created named <strong>{{created}}   </strong>with- {{at}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endifnotequal %}
+
+
+
+
+
+
+    <center class="mt-3"><h1>This Page Is For Adding Data</h1></center>
+    <hr>
+    <div class="container">
+      <div>
+      <center>
+        <button class="shrink-border"><a href="/home" target="_self">HOME</a></button>
+        <button class="material-bubble"><a href="/pickyweb" target="_self">PICKEYWEB</a></button>
+      </center>
+      </div>
+    </div>
+    <hr>
+    <center class="mt-3"><h4>Add Tags Here</h4><br>
+    <form action="2" method="POST">
+      {% csrf_token %}
+
+        <label for="tag">Tag: </label>
+        <input id="tag" type="text" name="tag">
+        <br>
+        <label for="detail">detail: </label>
+        <input id="detail" type="text" name="detail">
+        <br>
+        <label for="pic">pic: </label>
+        <input id="pic" type="text" name="pic">
+        <br>
+        <input type="submit" value="submit" >
+        <br>
+    </form>
+    </center>
+    <hr>
+{% comment %} --------------------------------------------------------------------  linkenter {% endcomment %}
+<hr>
+    <center class="mt-3"><h4>Add Links Here</h4><br>
+    <form action="1" method="POST">
+      {% csrf_token %}
+
+        <label for="url">url: </label>
+        <input id="url" type="text" name="url">
+        <br>
+        {% comment %} <label for="name">name: </label>
+        <input id="name" type="text" name="name">
+        <br> {% endcomment %}
+        <label for="tag">Choose a tag:</label>
+          <select id="tag" name="tag">
+            {% for t in tagdict%}
+            <option value="{{t.tag}}">{{t.tag}}</option>
+            {% endfor %}
+          </select>
+        <br>
+        <input type="submit" value="submit" >
+        <br>
+    </form>
+    </center>
+    <hr>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

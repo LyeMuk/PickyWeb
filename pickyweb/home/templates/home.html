@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>PickyWeb</title>
+<style>
+{% load static %}
+.imgtag{
+  width: 300px;
+  height: 169px;
+}
+.error{
+  width: 100%;
+  height: 90vh;
+  background-image: url('{% static 'error_page.jpg' %}');
+  background-size: 100% 100%;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+}
+</style>
+  </head>
+
+  <body>
+
+<!--  **********************************************navbar**********************************************************************-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand ml-3" href="pickyweb">PickyWeb</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" onclick="myFunction()" style="cursor: pointer;">Add</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact us</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action='' method="post">
+    {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search blank for all tags" aria-label="Search" name="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!--  **********************************************/navbar**********************************************************************-->
+<!--  **********************************************/small window function**********************************************************************-->
+<script>
+    function myFunction() {
+        window.open(href="{% url 'Password' %}",windowname="Password",'width=400vh,height=400vh,left=550vh,top=200vh');
+    }
+</script>
+<!--  **********************************************/small window function**********************************************************************-->
+<!--logo link https://www.canva.com/design/DAElr6tNlt8/share/preview?token=MGbge5ntWgWrWOG6UZKzKA&role=EDITOR&utm_content=DAElr6tNlt8&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton-->
+<!--  *****************************************************alert***************************************************************-->
+{% if h < 3 %}
+<div class="alert alert-dark alert-dismissible fade show" role="alert">
+  <strong>PickyWeb Welcomes You! </strong>Search your all needed websites here. &#128516;
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+<!--  ****************************************************/alert****************************************************************-->
+<!--  *********************************************************cards***********************************************************-->
+    <div class="col-md-20">
+        <div class="row ms-2 ps-6">
+
+         {% for t in tagi %}
+
+            <div class="col-md-3">
+                <div class="card my-2">
+                    {% comment %} ----------------------------------------------------------------------------- {% endcomment %}
+                    <div class="card">
+                    <div class="imgtag">
+                        <img src="https://source.unsplash.com/300x169/?{{t.tag}}" alt="TagImg" style="width:100%">
+                    </div>
+                    <div class="card-body">
+                        <small>Category: <strong>{{t.tag}}</strong></small>
+                    </div>
+                        <ul class="list-group list-group-flush" style="height: 250px; overflow-y: auto;">
+                            {% for l in link %}
+                            {% if l.tag == t.tag%}
+                            <li class="list-group-item"><a href="{{l.url}}" class="card-link" target="_blank">{{l.name}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% comment %} --------------------------------------------------------------------------------------------- {% endcomment %}
+
+                </div>
+            </div>
+         {% empty %}
+         <div class="error">
+         </div>
+         {% endfor %}
+        </div>
+    </div>
+  </div>
+<!--  ***********************************************************/cards*********************************************************-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
